@@ -14,15 +14,22 @@
         :key="item.id"
         class="menu-item"
       >
-        <div class="info">
+        <img 
+          :src="item.image" 
+          :alt="item.name"
+          class="menu-item-image"
+          loading="lazy"
+        />
+
+        <div class="menu-item-info">
           <div class="name">{{ item.name }}</div>
           <div class="description" v-if="item.description">
             {{ item.description }}
           </div>
         </div>
 
-        <div class="price">
-          {{ item.price }} ₴
+        <div class="menu-item-price">
+          <div class="price">{{ item.price }} ₴</div>
         </div>
       </div>
     </div>
@@ -45,30 +52,60 @@ const itemsByCategory = (category: string) => {
 <style scoped>
 .menu-page {
   padding: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 2rem;
+  background: linear-gradient(135deg, var(--coffee-dark), var(--accent-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .category {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
-.menu-item {
-  display: flex;
-  justify-content: space-between;
+.category h3 {
+  position: sticky;
+  top: 0;
+  background-color: var(--bg-secondary);
   padding: 12px 0;
-  border-bottom: 1px solid #eee;
+  z-index: 10;
+  backdrop-filter: blur(8px);
 }
 
-.name {
-  font-weight: 600;
-}
-
-.description {
-  font-size: 13px;
-  color: #777;
-}
-
-.price {
-  font-weight: bold;
-  white-space: nowrap;
+/* Додатковий стиль для мобільних */
+@media (max-width: 768px) {
+  .menu-item {
+    flex-wrap: wrap;
+  }
+  
+  .menu-item-image {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .menu-item-info {
+    width: 100%;
+    margin-top: 12px;
+  }
+  
+  .menu-item-price {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+  }
+  
+  .menu-item .add-btn {
+    padding: 8px 24px;
+    font-size: 1rem;
+  }
 }
 </style>
